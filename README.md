@@ -1,5 +1,6 @@
+# FoodMood
 
-Mobile-style Flask demo for food ordering recommendations using the uploaded `rules-1.ipynb` and `AI_dataset_HW_week2 (2).xlsx`.
+FoodMood là ứng dụng gợi ý món ăn và nhà hàng được xây dựng bằng *Flask*. Hệ thống sử dụng dữ liệu từ hai file CSV gồm thông tin nhà hàng và món ăn, kết hợp với logic mờ để đưa ra gợi ý phù hợp với ngân sách, mức độ đói, thời gian chờ, thời tiết và mục tiêu sức khỏe của người dùng.
 
 ## Run
 
@@ -16,27 +17,42 @@ Open:
 http://127.0.0.1:5000
 ```
 
-## What changed in V12
+## Dataset
 
-- Rebuilt `restaurants.csv` and `menu.csv` again directly from the new Excel file.
-- Verified exact core data transfer: 68 restaurants and 344 menu items, with 0 mismatches for IDs, names, and menu prices.
-- Health goal only includes: Giảm cân, Cân bằng, Tăng cơ.
-- Removed cuisine selection from the app flow.
-- Removed spicy-level logic/input from the app flow.
-- Changed suggestion mode to only 2 options: Bình thường and Ăn chay.
-- Bình thường includes all menu items, including vegetarian food.
-- Ăn chay filters vegetarian restaurants/items only.
-- Centered the suggestion-mode title/card area and the location/weather header.
-- Home label remains: Đa dạng quán.
-- Recommendation scoring follows the rule notebook weights: price 0.3, meal 0.5, distance 0.2.
+Project sử dụng 2 tập dữ liệu chính:
 
+| File | Nội dung |
+|---|---|
+| restaurants.csv | Thông tin nhà hàng |
+| menu.csv | Thông tin món ăn/thức uống |
 
-## V15 Patch
+Bộ dữ liệu hiện có:
 
-This version fixes meal recommendation scoring by matching menu categories directly with fuzzy rule strengths instead of using a numeric meal centroid. It also adds budget guardrails, softer balanced-health logic, and lower rating weight in restaurant ranking.
+- 68 nhà hàng
+- 344 món ăn/thức uống
 
+## Tính năng chính
 
-## V21 UI cleanup
+- Gợi ý món ăn và nhà hàng theo ngữ cảnh người dùng
+- Sử dụng fuzzy logic để xử lý các input như ngân sách, mức độ đói, thời gian chờ, thời tiết và mục tiêu sức khỏe
+- Tự động lấy vị trí và thời tiết hiện tại nếu người dùng cho phép
+- Hiển thị chi tiết nhà hàng
+- Thêm món vào giỏ hàng
+- Checkout đơn hàng
+- Mô phỏng trạng thái đơn hàng
+- Ước lượng phí giao hàng và thời gian giao hàng
 
-- Removed restaurant rating display from recommendation cards and restaurant detail header.
-- Removed food thumbnails from the restaurant menu list to make the menu cleaner.
+## Cấu trúc project
+
+```text
+foodmood/
+│
+├── app.py
+├── data/
+│   ├── restaurants.csv
+│   └── menu.csv
+│
+├── templates/
+├── static/
+├── requirements.txt
+└── README.md
